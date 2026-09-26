@@ -1,0 +1,27 @@
+[gd_scene load_steps=3 format=3 uid="uid://dhgd2kwp0nsi5"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_wusub"]
+bg_color = Color(0.88, 0.7392, 0.7392, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_b3bc3"]
+bg_color = Color(1, 0, 0, 1)
+
+[node name="UI" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="PlayerHealth" type="ProgressBar" parent="."]
+offset_left = 1.0
+offset_top = -150.0
+offset_right = 5.0
+offset_bottom = -123.0
+scale = Vector2(16.7991, 0.853903)
+theme_override_colors/font_color = Color(0.842675, 0, 0, 1)
+theme_override_styles/background = SubResource("StyleBoxFlat_wusub")
+theme_override_styles/fill = SubResource("StyleBoxFlat_b3bc3")
+step = 1.0
+show_percentage = false

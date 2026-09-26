@@ -1,0 +1,62 @@
+[gd_scene load_steps=7 format=3 uid="uid://cn13n1jlijuyq"]
+
+[ext_resource type="PackedScene" uid="uid://6xk8covt2up3" path="res://character_body.tscn" id="1_glv2v"]
+[ext_resource type="PackedScene" uid="uid://dsly8objxnfu7" path="res://hadoken.tscn" id="2_uu6xs"]
+[ext_resource type="PackedScene" uid="uid://d1w4awnpsdxwx" path="res://Enemy_body_2d.tscn" id="3_r0du0"]
+
+[sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_glv2v"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_uu6xs"]
+bg_color = Color(0.88, 0.7392, 0.7392, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_r0du0"]
+bg_color = Color(1, 0, 0, 1)
+
+[node name="Node2D" type="Node2D"]
+position = Vector2(-1, -1)
+
+[node name="Camera2D" type="Camera2D" parent="."]
+use_parent_material = true
+position = Vector2(1, -50)
+offset = Vector2(0, -100)
+anchor_mode = 0
+ignore_rotation = false
+zoom = Vector2(7, 4)
+
+[node name="CharacterBody2D" parent="." instance=ExtResource("1_glv2v")]
+position = Vector2(35, 155)
+
+[node name="Ground" type="StaticBody2D" parent="."]
+visible = false
+position = Vector2(1, 1)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Ground"]
+shape = SubResource("WorldBoundaryShape2D_glv2v")
+
+[node name="Hadoken" parent="." instance=ExtResource("2_uu6xs")]
+position = Vector2(80, -61)
+
+[node name="UI" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="PlayerHealth" type="ProgressBar" parent="UI"]
+layout_mode = 0
+offset_left = 1.0
+offset_top = -150.0
+offset_right = 5.0
+offset_bottom = -123.0
+scale = Vector2(16.7991, 0.853903)
+theme_override_colors/font_color = Color(0.842675, 0, 0, 1)
+theme_override_styles/background = SubResource("StyleBoxFlat_uu6xs")
+theme_override_styles/fill = SubResource("StyleBoxFlat_r0du0")
+step = 1.0
+show_percentage = false
+
+[node name="EnemyBody2D" parent="." instance=ExtResource("3_r0du0")]
+position = Vector2(108, -40)
+
+[connection signal="ready" from="CharacterBody2D" to="CharacterBody2D" method="_on_ready"]
+[connection signal="ready" from="UI/PlayerHealth" to="CharacterBody2D" method="_on_player_health_ready"]
